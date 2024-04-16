@@ -25,6 +25,7 @@ resource "aws_s3_bucket" "private_storage" {
 resource "aws_s3_bucket_acl" "private_storage" {
   bucket = aws_s3_bucket.private_storage.id
   acl    = "private"
+
 }
 
 locals {
