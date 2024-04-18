@@ -93,6 +93,7 @@ class MyHomePageState extends State<MyHomePage> {
               resultMessage: _resultMessage,
               errorMessage: _errorMessage,
             ),
+            WidgetUsuario(),
           ],
         ),
       ),
@@ -132,6 +133,87 @@ class _ResultDisplay extends StatelessWidget {
       child: Center(
         child: Text(text),
       ),
+    );
+  }
+}
+
+class WidgetUsuario extends StatefulWidget {
+  const WidgetUsuario({super.key});
+
+  @override
+  State<WidgetUsuario> createState() => _WidgetUsuarioState();
+}
+
+class _WidgetUsuarioState extends State<WidgetUsuario> {
+  TextEditingController tecNombre = TextEditingController();
+  TextEditingController tecPaterno = TextEditingController();
+  TextEditingController tecResultado = TextEditingController();
+  TextEditingController tecId = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    tecNombre.text = '';
+    tecPaterno.text = '';
+    tecResultado.text = '';
+    tecId.text = '0';
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    tecNombre.dispose();
+    tecPaterno.dispose();
+    tecResultado.dispose();
+    tecId.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        TextFormField(
+          controller: tecNombre,
+        ),
+        TextFormField(
+          controller: tecPaterno,
+        ),
+        TextButton(
+            onPressed: () async {
+              Usuario ss = Usuario();
+              ss.nombre = tecNombre.text;
+              ss.apaterno = tecPaterno.text;
+
+              final data = await client.usuarios.addUsuario(ss);
+            },
+            child: Text('Agregar')),
+        SizedBox(
+          height: 50,
+        ),
+        TextFormField(
+          controller: tecId,
+        ),
+        TextButton(
+            onPressed: () async {
+              try {
+                final usr =
+                    await client.usuarios.getUsuario(int.parse(tecId.text));
+
+                setState(() {
+                  tecResultado.text = '${usr!.nombre} ${usr!.apaterno}';
+                });
+              } catch (e) {
+                debugPrint('Error ${e.toString()}');
+              }
+            },
+            child: Text('Mostrar')),
+        Text('${tecResultado.text}'),
+      ],
     );
   }
 }

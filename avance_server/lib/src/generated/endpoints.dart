@@ -10,6 +10,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 import '../endpoints/example_endpoint.dart' as _i2;
+import '../endpoints/usuarios_endpoint.dart' as _i3;
+import 'package:avance_server/src/generated/usuarios.dart' as _i4;
 
 class Endpoints extends _i1.EndpointDispatch {
   @override
@@ -20,7 +22,13 @@ class Endpoints extends _i1.EndpointDispatch {
           server,
           'example',
           null,
-        )
+        ),
+      'usuarios': _i3.UsuariosEndpoint()
+        ..initialize(
+          server,
+          'usuarios',
+          null,
+        ),
     };
     connectors['example'] = _i1.EndpointConnector(
       name: 'example',
@@ -44,6 +52,48 @@ class Endpoints extends _i1.EndpointDispatch {
             params['name'],
           ),
         )
+      },
+    );
+    connectors['usuarios'] = _i1.EndpointConnector(
+      name: 'usuarios',
+      endpoint: endpoints['usuarios']!,
+      methodConnectors: {
+        'addUsuario': _i1.MethodConnector(
+          name: 'addUsuario',
+          params: {
+            'usuario': _i1.ParameterDescription(
+              name: 'usuario',
+              type: _i1.getType<_i4.Usuario>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['usuarios'] as _i3.UsuariosEndpoint).addUsuario(
+            session,
+            params['usuario'],
+          ),
+        ),
+        'getUsuario': _i1.MethodConnector(
+          name: 'getUsuario',
+          params: {
+            'idUsuario': _i1.ParameterDescription(
+              name: 'idUsuario',
+              type: _i1.getType<int>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['usuarios'] as _i3.UsuariosEndpoint).getUsuario(
+            session,
+            params['idUsuario'],
+          ),
+        ),
       },
     );
   }
