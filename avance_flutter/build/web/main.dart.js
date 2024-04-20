@@ -81550,7 +81550,7 @@ s($,"aEL","d4",()=>A.au4(A.am9(A.b([1],t.t)).buffer,0,null).getInt8(0)===1?B.ah:
 s($,"aI1","SG",()=>new A.Uj(A.A(t.N,A.ah("jP"))))
 r($,"aHw","ag3",()=>B.yH)
 s($,"aFi","arf",()=>new A.Hl())
-r($,"aI2","ag5",()=>{var q,p=null,o="https://52.33.127.64:8080/",n=$.arf(),m=A.b([],t.u)
+r($,"aI2","ag5",()=>{var q,p=null,o="http://localhost:8080/",n=$.arf(),m=A.b([],t.u)
 m=new A.Uu(o,m,n,!0,p,B.Bf)
 m.Xr(o,n,p,p,!0,p,p)
 n=A.ah("Il")
