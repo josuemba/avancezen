@@ -211,7 +211,7 @@ class _WidgetUsuarioState extends State<WidgetUsuario> {
                 debugPrint('Error ${e.toString()}');
               }
             },
-            child: Text('Mostrar')),
+            child: Text('Mostrars')),
         Text('${tecResultado.text}'),
       ],
     );
